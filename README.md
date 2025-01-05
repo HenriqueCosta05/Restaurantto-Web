@@ -45,7 +45,7 @@ O Restauranto nasceu da necessidade de automatizar processos em restaurantes e l
 - Docker (opcional): <https://www.docker.com/>
 
 ```
-  git clone https://github.com/HenriqueCosta05/Restaurantto-frontend
+  git clone https://github.com/HenriqueCosta05/Restaurantto-Web
 ```
 
 ### Instalar dependências
