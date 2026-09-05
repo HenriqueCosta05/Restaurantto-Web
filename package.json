@@ -4,6 +4,9 @@
   "description": "Restaurantto App - Front-end System",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",

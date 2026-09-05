@@ -22,7 +22,6 @@ import {
 } from '@presentation/view/components/chart';
 import { ExpenseDto, RevenueDto, PaginatedResponse } from '@domain/dtos';
 import ApexCharts from 'apexcharts';
-import { CardListComponent } from '../../../../components/card-list/card-list.component';
 import { TableComponent } from '../../../../components/table/table.component';
 import { Subscription } from 'rxjs';
 import { ExpensesUseCase, RevenuesUseCase } from '@domain/usecases';
@@ -37,7 +36,6 @@ import { ExpensesUseCase, RevenuesUseCase } from '@domain/usecases';
         TableComponent,
         PieComponent,
         ButtonComponent,
-        CardListComponent,
     ],
 
     templateUrl: './painel-contador.component.html',

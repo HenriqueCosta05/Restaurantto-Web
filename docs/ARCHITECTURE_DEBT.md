@@ -79,6 +79,74 @@ by accident.
   the bundle happens to be is a trend someone should own (e.g. lazy-loading
   admin routes, auditing chart-library weight) rather than keep bumping.
 
+## Domain still inherits from infra (Dependency Rule only half-fixed)
+
+- Extracting `HttpClient` out of the domain layer satisfies the "no
+  `HttpClient` in domain" grep gate, but the import arrow between domain and
+  infra still points the wrong way: it now runs through inheritance instead
+  of a raw `HttpClient` field. `grep -rn "@infra" src/app/domain` shows ~10
+  use case files still `import { HttpUseCaseGateway } from
+  '@infra/http/http-usecase-gateway'` and `extends
+  HttpUseCaseGateway<T>`:
+  - `src/app/domain/usecases/admin/collaborator.usecase/collaborator.usecase.ts`
+  - `src/app/domain/usecases/admin/datasheet.usecase/datasheet.usecase.ts`
+  - `src/app/domain/usecases/admin/datasheet.usecase/datasheet.group.usecase.ts`
+  - `src/app/domain/usecases/admin/finances.usecase/cash-flow.usecase.ts`
+  - `src/app/domain/usecases/admin/finances.usecase/expenses.usecase.ts`
+  - `src/app/domain/usecases/admin/finances.usecase/revenues.usecase.ts`
+  - `src/app/domain/usecases/admin/finances.usecase/finance.group.usecase.ts`
+  - `src/app/domain/usecases/admin/ingredients.usecase/ingredients.usecase.ts`
+  - `src/app/domain/usecases/admin/suppliers.usecase/suppliers.usecase.ts`
+  - `src/app/domain/usecases/prospection/send-prospection-form/send-prospection-form.use-case.ts`
+
+  Each of these compiles today only because they still `import` a concrete
+  infra class directly into `domain/`. Under the Dependency Rule, domain
+  should depend only on an abstraction it owns. The correct end state is
+  already demonstrated elsewhere in this same branch by
+  `AUTH_GATEWAY`/`SESSION_GATEWAY`: define an injection-token-based port for
+  `BaseUseCaseRepository<T>` in `domain`, have each use case above inject
+  that port instead of extending a concrete infra class, and bind
+  `{ provide: <TOKEN>, useClass: HttpUseCaseGateway }` per entity type at
+  the composition root (`src/app/app.config.ts`). This is a plan defect,
+  not an implementation defect — the task brief's own literal instruction
+  was "extend HttpUseCaseGateway" — so flag it as the next architecture
+  task rather than a regression introduced during implementation.
+
+## `tsconfig.json` / `tsconfig.app.json` diagnostics silenced during the upgrade
+
+- `tsconfig.json`'s `"skipLibCheck": true` was added during the Angular
+  19->22 upgrade to work around `apexcharts`' legacy `declare module` type
+  definitions. Defensible — it's `ng new`'s current default — but it
+  silences lib type-checking repo-wide instead of scoping the workaround to
+  just the apexcharts import site. Worth narrowing later, e.g. a local
+  `.d.ts` shim for apexcharts instead of a global skip.
+- `tsconfig.app.json`'s `angularCompilerOptions.extendedDiagnostics` now
+  suppresses `nullishCoalescingNotNullable` and `optionalChainNotNullable`,
+  added by an automated codemod during the same upgrade. Low-stakes, but it
+  permanently disables two real Angular template correctness diagnostics
+  repo-wide rather than fixing whatever template(s) triggered them. Worth
+  revisiting: find what triggered the suppression, fix the template, then
+  re-enable both checks.
+
+## Non-functional search boxes (wiring now correct, behavior still stubbed)
+
+- The searchbar wiring bug fix in this branch means every `Searchbar`
+  configured with an `onSearch` callback now actually fires it — but 8
+  pages still configure `onSearch: (value) => { console.log(value); }`
+  instead of doing real filtering, so those search boxes are now reachable
+  but still do nothing when used:
+  - `src/app/presentation/view/pages/admin/dashboard/dashboard.component.ts`
+  - `src/app/presentation/view/pages/admin/dashboard/colaborador/colaborador.component.ts`
+  - `src/app/presentation/view/pages/admin/cash-flow/financas/grupo-financas/grupo-financas.component.ts`
+  - `src/app/presentation/view/pages/admin/cash-flow/ultimas-transacoes/ultimas-transacoes.component.ts`
+  - `src/app/presentation/view/pages/admin/orders/delivery/delivery.component.ts`
+  - `src/app/presentation/view/pages/admin/orders/ultimos-pedidos/ultimos-pedidos.component.ts`
+  - `src/app/presentation/view/pages/admin/stock-control/fornecedor/dash-fornecedores/dash-fornecedores.component.ts`
+  - `src/app/presentation/view/pages/admin/stock-control/ingredientes/dash-ingredientes/dash-ingredientes.component.ts`
+
+  Follow-up: apply the same client-side-filter pattern used for the 3
+  search features fixed in this branch to these 8 remaining pages.
+
 ## Pre-existing test breakage (not introduced by this task)
 
 - `src/app/domain/usecases/shared/authenticate.use-case.spec.ts` references

@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
             positionClass: 'toast-bottom-right',
             preventDuplicates: true,
         }),
-        { provide: AUTH_GATEWAY, useClass: HttpAuthGateway },
-        { provide: SESSION_GATEWAY, useClass: HttpSessionGateway },
+        { provide: AUTH_GATEWAY, useExisting: HttpAuthGateway },
+        { provide: SESSION_GATEWAY, useExisting: HttpSessionGateway },
     ],
 };
