@@ -8,13 +8,15 @@ import {
     ListByPeriodDto,
     SupplierDto,
 } from '@domain/dtos';
-import { ErrorService, BaseUseCase } from '@domain/base';
+import { HttpUseCaseGateway } from '@infra/http/http-usecase-gateway';
+import { ErrorService } from '@infra/http/error.service';
+import { COLLABORATOR_ENDPOINTS } from '@infra/http/endpoints';
 import { API_URL } from '@shared/constants';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
+export class CollaboratorUseCase extends HttpUseCaseGateway<CollaboratorDto> {
     private apiBase = API_URL;
 
     constructor(_http: HttpClient, _errorService: ErrorService) {
@@ -25,15 +27,25 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
         page: number,
         size: number,
     ): Observable<PaginatedResponse<CollaboratorDto>> {
-        return this.getAll(`${this.apiBase}/api/users/get-users`, page, size);
+        return this.getAll(
+            `${this.apiBase}${COLLABORATOR_ENDPOINTS.getUsers}`,
+            page,
+            size,
+        );
     }
 
     getCollaboratorById(id: string): Observable<CollaboratorDto> {
-        return this.getById(`${this.apiBase}/api/users/get-users-by-id`, id);
+        return this.getById(
+            `${this.apiBase}${COLLABORATOR_ENDPOINTS.getUsersById}`,
+            id,
+        );
     }
 
     registerCollaborator(data: CollaboratorDto): Observable<CollaboratorDto> {
-        return this.create(`${this.apiBase}/api/users/create-complete`, data);
+        return this.create(
+            `${this.apiBase}${COLLABORATOR_ENDPOINTS.createComplete}`,
+            data,
+        );
     }
 
     listCollaboratorsPerWeek(
@@ -48,7 +60,7 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
 
         if (period) {
             return this.listPerPeriod(
-                `${this.apiBase}/api/products/list-users-by-period`,
+                `${this.apiBase}${COLLABORATOR_ENDPOINTS.listUsersByPeriodProducts}`,
                 period,
                 'groupingType=week',
             ).pipe(
@@ -59,7 +71,7 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
             );
         }
         return this.listPerPeriod(
-            `${this.apiBase}/api/users/list-users-by-period`,
+            `${this.apiBase}${COLLABORATOR_ENDPOINTS.listUsersByPeriod}`,
             { startDate: startDateString, endDate: endDateString },
             'groupingType=week',
         ).pipe(
@@ -71,10 +83,17 @@ export class CollaboratorUseCase extends BaseUseCase<CollaboratorDto> {
         id: string,
         data: CollaboratorDto,
     ): Observable<CollaboratorDto> {
-        return this.update(`${this.apiBase}/api/users/update`, data, id);
+        return this.update(
+            `${this.apiBase}${COLLABORATOR_ENDPOINTS.update}`,
+            data,
+            id,
+        );
     }
 
     deleteCollaborator(id: string): Observable<CollaboratorDto> {
-        return this.delete(`${this.apiBase}/api/users/delete`, id);
+        return this.delete(
+            `${this.apiBase}${COLLABORATOR_ENDPOINTS.delete}`,
+            id,
+        );
     }
 }

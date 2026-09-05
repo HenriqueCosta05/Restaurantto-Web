@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseUseCase, ErrorService } from '@domain/base';
+import { HttpUseCaseGateway } from '@infra/http/http-usecase-gateway';
+import { ErrorService } from '@infra/http/error.service';
 import {
     DataSheetDto,
     ListByPeriodDto,
@@ -14,7 +15,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root',
 })
-export class DataSheetUseCase extends BaseUseCase<DataSheetDto> {
+export class DataSheetUseCase extends HttpUseCaseGateway<DataSheetDto> {
     private apiBase = API_URL;
 
     constructor(_http: HttpClient, _errorService: ErrorService) {

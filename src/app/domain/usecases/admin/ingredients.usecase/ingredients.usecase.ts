@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseUseCase, ErrorService } from '@domain/base';
+import { HttpUseCaseGateway } from '@infra/http/http-usecase-gateway';
+import { ErrorService } from '@infra/http/error.service';
 import {
     IngredientDto,
     ListByPeriodDto,
@@ -14,7 +15,7 @@ import { API_URL } from 'src/app/shared';
 @Injectable({
     providedIn: 'root',
 })
-export class IngredientsUseCase extends BaseUseCase<IngredientDto> {
+export class IngredientsUseCase extends HttpUseCaseGateway<IngredientDto> {
     private apiBase = API_URL;
 
     constructor(_http: HttpClient, _errorService: ErrorService) {
