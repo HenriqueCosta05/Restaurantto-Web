@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -33,6 +33,7 @@ import { ActivatedRoute, Router } from '@angular/router';
         CommonModule,
     ],
     templateUrl: './nova-receita.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class NovaReceitaComponent implements OnInit {

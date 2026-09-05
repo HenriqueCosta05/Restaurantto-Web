@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -31,6 +31,7 @@ import { ToastrService } from 'ngx-toastr';
         FormInputComponent,
     ] as const,
     templateUrl: './fornecedor.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class FornecedorComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SearchbarConfig } from '@domain/static/interfaces';
 
@@ -7,6 +7,7 @@ import { SearchbarConfig } from '@domain/static/interfaces';
     standalone: true,
     imports: [FormsModule],
     templateUrl: './searchbar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class SearchbarComponent {

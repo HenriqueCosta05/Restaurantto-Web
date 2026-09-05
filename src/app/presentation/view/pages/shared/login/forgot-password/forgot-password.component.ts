@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -24,6 +24,7 @@ import { FormInputComponent } from '@presentation/view/components/form';
         ButtonComponent,
         FooterComponent,
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
 })
 export class ForgotPasswordComponent implements OnInit {

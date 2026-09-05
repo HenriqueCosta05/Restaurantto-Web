@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+    Component,
+    OnDestroy,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatedResponse, SupplierDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
@@ -21,6 +26,7 @@ import { Subscription } from 'rxjs';
         FormsModule,
     ],
     templateUrl: './dash-fornecedores.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class DashFornecedoresComponent implements OnInit, OnDestroy {

@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
 import {
     ButtonComponent,
@@ -14,6 +19,7 @@ import { Subscription, forkJoin } from 'rxjs';
     standalone: true,
     imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './ultimas-transacoes.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class UltimasTransacoesComponent implements OnInit, OnDestroy {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CardList } from '@domain/static/interfaces';
 import {
     ButtonComponent,
@@ -11,6 +11,7 @@ import {
     standalone: true,
     imports: [SidebarComponent, CardListComponent, ButtonComponent],
     templateUrl: './controle-mesas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class ControleMesasComponent {

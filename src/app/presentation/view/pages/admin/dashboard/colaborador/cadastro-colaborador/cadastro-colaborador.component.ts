@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -35,6 +35,7 @@ import { TokenService } from '../../../../../../../security';
         FormComponent,
     ],
     templateUrl: './cadastro-colaborador.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class CadastroColaboradorComponent implements OnInit {

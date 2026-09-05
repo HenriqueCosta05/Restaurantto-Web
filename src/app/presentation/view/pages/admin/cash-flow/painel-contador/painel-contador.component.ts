@@ -1,5 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import {
+    Component,
+    AfterViewInit,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     CardList,
     PieChartOptions,
@@ -36,6 +41,7 @@ import { ExpensesUseCase, RevenuesUseCase } from '@domain/usecases';
     ],
 
     templateUrl: './painel-contador.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class PainelContadorComponent implements OnInit, AfterViewInit {

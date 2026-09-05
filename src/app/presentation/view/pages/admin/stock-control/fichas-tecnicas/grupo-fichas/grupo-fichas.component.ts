@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataSheetDto, DataSheetGroupDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
@@ -15,6 +21,7 @@ import { Subscription } from 'rxjs';
     standalone: true,
     imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './grupo-fichas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class GrupoFichasComponent implements OnInit, OnDestroy {

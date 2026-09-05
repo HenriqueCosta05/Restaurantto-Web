@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -36,6 +36,7 @@ import { catchError, of } from 'rxjs';
         ReactiveFormsModule,
     ],
     templateUrl: './form-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class FormLayoutComponent implements OnInit {

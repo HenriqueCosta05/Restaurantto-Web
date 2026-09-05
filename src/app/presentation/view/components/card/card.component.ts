@@ -1,5 +1,11 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { RouterModule } from '@angular/router';
 
@@ -8,6 +14,7 @@ import { RouterModule } from '@angular/router';
     standalone: true,
     imports: [NgClass, ButtonComponent],
     templateUrl: './card.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class CardComponent {

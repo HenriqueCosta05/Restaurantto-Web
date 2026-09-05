@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { PieChartOptions, PieMetrics } from '@domain/static/interfaces';
 
 @Component({
@@ -6,6 +6,7 @@ import { PieChartOptions, PieMetrics } from '@domain/static/interfaces';
     standalone: true,
     imports: [],
     templateUrl: './pie.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class PieComponent {

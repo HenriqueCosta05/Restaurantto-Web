@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
     standalone: true,
     imports: [CommonModule, SearchbarComponent, RouterLink],
     templateUrl: './table.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class TableComponent<T extends Record<string, unknown>> {

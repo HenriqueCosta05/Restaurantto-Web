@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ButtonComponent } from '@presentation/view/components';
 
 @Component({
@@ -7,6 +7,7 @@ import { ButtonComponent } from '@presentation/view/components';
     standalone: true,
     templateUrl: './section-layout.component.html',
     styles: [],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ButtonComponent, NgClass],
 })
 export class SectionLayoutComponent {

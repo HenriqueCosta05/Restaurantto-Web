@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { TableConfig } from '@domain/static/interfaces';
 import {
@@ -16,6 +16,7 @@ import { ExpenseDto, FinanceGroupDto, RevenueDto } from '@domain/dtos';
     standalone: true,
     imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './grupo-financas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class GrupoFinancasComponent implements OnInit {

@@ -1,5 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+    Component,
+    forwardRef,
+    Input,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     ControlValueAccessor,
     FormControl,
@@ -17,6 +22,7 @@ import {
             multi: true,
         },
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgClass],
 })
 export class FormInputComponent implements ControlValueAccessor {

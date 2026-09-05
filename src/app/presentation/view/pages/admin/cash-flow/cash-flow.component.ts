@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
     LineColumnChartOptions,
     LineColumnMetrics,
@@ -17,6 +17,7 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
         ButtonComponent,
     ],
     templateUrl: './cash-flow.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class CashFlowComponent {

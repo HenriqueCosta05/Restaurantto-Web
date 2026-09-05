@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+    Component,
+    OnDestroy,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { IngredientDto, PaginatedResponse } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
 import { IngredientsUseCase } from '@domain/usecases';
@@ -14,6 +19,7 @@ import { Subscription } from 'rxjs';
     standalone: true,
     imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './dash-ingredientes.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class DashIngredientesComponent implements OnInit, OnDestroy {

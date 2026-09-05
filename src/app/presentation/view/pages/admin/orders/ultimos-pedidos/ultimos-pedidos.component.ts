@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TableConfig } from '@domain/static/interfaces';
 import {
     ButtonComponent,
@@ -11,6 +11,7 @@ import {
     standalone: true,
     imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './ultimos-pedidos.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class UltimosPedidosComponent {

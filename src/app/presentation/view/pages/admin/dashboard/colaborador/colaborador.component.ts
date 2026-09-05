@@ -1,5 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { PaginatedResponse, CollaboratorDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
 import { CollaboratorUseCase } from '@domain/usecases/admin';
@@ -21,6 +26,7 @@ import { Subscription } from 'rxjs';
         WrapperComponent,
     ],
     templateUrl: './colaborador.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class ColaboradorComponent implements OnInit, OnDestroy {

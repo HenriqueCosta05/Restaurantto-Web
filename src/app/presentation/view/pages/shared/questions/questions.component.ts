@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FaqComponent, SidebarComponent } from '@presentation/view/components';
 
 @Component({
@@ -6,6 +6,7 @@ import { FaqComponent, SidebarComponent } from '@presentation/view/components';
     standalone: true,
     imports: [SidebarComponent, FaqComponent],
     templateUrl: './questions.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class QuestionsComponent {

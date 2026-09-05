@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { PieChartOptions, PieMetrics } from '@domain/static/interfaces';
 import {
     ButtonComponent,
@@ -43,6 +48,7 @@ interface CardData {
     standalone: true,
     imports: [SidebarComponent, CardComponent, ButtonComponent, PieComponent],
     templateUrl: './stock-control.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class StockControlComponent implements OnInit, AfterViewInit {

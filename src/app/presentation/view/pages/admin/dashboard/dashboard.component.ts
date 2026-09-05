@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     CollaboratorDto,
     DataSheetDto,
@@ -55,6 +60,7 @@ interface CardData {
         TableComponent,
     ],
     templateUrl: './dashboard.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class DashboardComponent implements OnInit, OnDestroy {

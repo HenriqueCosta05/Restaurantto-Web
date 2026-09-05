@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Homepage } from '@domain/static/interfaces';
 import { homeData } from '@domain/static/data';
 import {
@@ -19,6 +19,7 @@ import { DataTransferService } from '@domain/static/services';
         FooterComponent,
     ],
     templateUrl: './homepage.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class HomepageComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '@presentation/view/components';
 import { SidebarService } from '@domain/static/services';
@@ -8,6 +8,7 @@ import { AuthenticateUseCase } from '@domain/usecases';
     selector: 'app-navbar',
     standalone: true,
     imports: [CommonModule, ButtonComponent],
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { DataSheetGroupUseCase } from '@domain/usecases';
 import {
     ButtonComponent,
@@ -15,6 +20,7 @@ interface CardData {
     standalone: true,
     imports: [SidebarComponent, CardComponent, ButtonComponent],
     templateUrl: './fichas-tecnicas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class FichasTecnicasComponent implements OnInit {

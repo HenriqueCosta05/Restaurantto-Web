@@ -7,7 +7,7 @@
             <p class="text-lg lg:text-xl mb-4">
                 {{ homepageData?.intro?.description }}
             </p>
-            <app-button [link]="homepageData?.intro?.button?.link">
+            <app-button [link]="$safeNavigationMigration(homepageData?.intro?.button?.link)">
                 {{ homepageData?.intro?.button?.text }}
             </app-button>
         </div>
