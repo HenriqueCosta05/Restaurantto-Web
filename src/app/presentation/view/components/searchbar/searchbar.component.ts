@@ -14,7 +14,6 @@ export class SearchbarComponent {
     @Input() searchBarConfig!: SearchbarConfig;
 
     onSearch(value: string): void {
-        if (!value) return;
         this.searchBarConfig.value = value;
         this.searchBarConfig.onSearch(value);
     }
