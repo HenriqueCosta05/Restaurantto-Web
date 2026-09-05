@@ -9,6 +9,9 @@ import {
 } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { AUTH_GATEWAY, SESSION_GATEWAY } from '@domain/base';
+import { HttpAuthGateway } from '@infra/http/http-auth.gateway';
+import { HttpSessionGateway } from '@infra/security/http-session.gateway';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -21,5 +24,7 @@ export const appConfig: ApplicationConfig = {
             positionClass: 'toast-bottom-right',
             preventDuplicates: true,
         }),
+        { provide: AUTH_GATEWAY, useClass: HttpAuthGateway },
+        { provide: SESSION_GATEWAY, useClass: HttpSessionGateway },
     ],
 };
