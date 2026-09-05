@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { RouterModule } from '@angular/router';
@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 @Component({
     selector: 'app-card',
     standalone: true,
-    imports: [NgClass, NgIf, ButtonComponent],
+    imports: [NgClass, ButtonComponent],
     templateUrl: './card.component.html',
     styles: ``,
 })

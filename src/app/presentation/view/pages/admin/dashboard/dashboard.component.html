@@ -12,18 +12,20 @@
 
             <div class="flex 2xl:justify-end flex-wrap 2xl:w-1/2 w-full justify-center items-center">
                 <div class="grid md:grid-cols-2 w-full">
-                    <div *ngFor="let card of cardData">
-                        <app-card
-                            class="w-full"
-                            [isDemographic]="true"
-                            [iconClass]="card.iconClass"
-                            [title]="card.name"
-                            [metric]="card.metric"
-                            [percentageChange]="card.percentageChange"
-                            [isPositive]="card.percentageChange >= 0"
-                            [metricTitle]="card.metricTitle"
-                        />
-                    </div>
+                    @for (card of cardData; track card) {
+                        <div>
+                            <app-card
+                                class="w-full"
+                                [isDemographic]="true"
+                                [iconClass]="card.iconClass"
+                                [title]="card.name"
+                                [metric]="card.metric"
+                                [percentageChange]="card.percentageChange"
+                                [isPositive]="card.percentageChange >= 0"
+                                [metricTitle]="card.metricTitle"
+                            />
+                        </div>
+                    }
                 </div>
             </div>
         </div>

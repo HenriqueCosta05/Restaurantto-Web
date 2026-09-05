@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
     FormBuilder,
@@ -25,7 +24,6 @@ import { TokenService } from 'src/app/security';
         FormComponent,
         FormInputComponent,
         ReactiveFormsModule,
-        CommonModule,
         ButtonComponent,
         FooterComponent,
     ],

@@ -9,7 +9,7 @@
                 <p class="text-left text-[14px]">Navegue pelo sistema</p>
                 <hr class="border-white" />
 
-                <ng-container *ngFor="let item of sidebarItems.slice(0, 5); let i = index">
+                @for (item of sidebarItems.slice(0, 5); track item; let i = $index) {
                     <div class="group my-4">
                         <a
                             [href]="item.link"
@@ -17,34 +17,32 @@
                         >
                             <i [class]="item.icon"></i>
                             <span class="ml-4">{{ item.title }}</span>
-                            <i
-                                *ngIf="item.subItems"
-                                class="fas fa-chevron-down ml-auto"
-                            ></i>
+                            @if (item.subItems) {
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            }
                         </a>
-                        <div
-                            *ngIf="item.subItems"
-                            class="hidden group-hover:block pl-4"
-                        >
-                            <ng-container *ngFor="let subItem of item.subItems">
-                                <a
-                                    [href]="subItem.link"
-                                    class="block p-3 text-sm font-medium rounded-lg hover:bg-hover"
-                                >
-                                    <i [class]="subItem.icon"></i>
-                                    <span class="ml-4">{{ subItem.title }}</span>
-                                </a>
-                            </ng-container>
-                        </div>
+                        @if (item.subItems) {
+                            <div class="hidden group-hover:block pl-4">
+                                @for (subItem of item.subItems; track subItem) {
+                                    <a
+                                        [href]="subItem.link"
+                                        class="block p-3 text-sm font-medium rounded-lg hover:bg-hover"
+                                    >
+                                        <i [class]="subItem.icon"></i>
+                                        <span class="ml-4">{{ subItem.title }}</span>
+                                    </a>
+                                }
+                            </div>
+                        }
                     </div>
-                </ng-container>
+                }
             </div>
 
             <div>
                 <p class="text-left text-[14px]">Ajude-nos a melhorar!</p>
                 <hr class="border-white" />
 
-                <ng-container *ngFor="let item of sidebarItems.slice(5, 7); let i = index">
+                @for (item of sidebarItems.slice(5, 7); track item; let i = $index) {
                     <div class="group my-4">
                         <a
                             [href]="item.link"
@@ -52,32 +50,30 @@
                         >
                             <i [class]="item.icon"></i>
                             <span class="ml-4">{{ item.title }}</span>
-                            <i
-                                *ngIf="item.subItems"
-                                class="fas fa-chevron-down ml-auto"
-                            ></i>
+                            @if (item.subItems) {
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            }
                         </a>
-                        <div
-                            *ngIf="item.subItems"
-                            class="hidden group-hover:block pl-4"
-                        >
-                            <ng-container *ngFor="let subItem of item.subItems">
-                                <a
-                                    [href]="subItem.link"
-                                    class="block p-3 text-sm font-medium rounded-lg hover:bg-hover"
-                                >
-                                    <i [class]="subItem.icon"></i>
-                                    <span class="ml-4">{{ subItem.title }}</span>
-                                </a>
-                            </ng-container>
-                        </div>
+                        @if (item.subItems) {
+                            <div class="hidden group-hover:block pl-4">
+                                @for (subItem of item.subItems; track subItem) {
+                                    <a
+                                        [href]="subItem.link"
+                                        class="block p-3 text-sm font-medium rounded-lg hover:bg-hover"
+                                    >
+                                        <i [class]="subItem.icon"></i>
+                                        <span class="ml-4">{{ subItem.title }}</span>
+                                    </a>
+                                }
+                            </div>
+                        }
                     </div>
-                </ng-container>
+                }
             </div>
 
             <!-- Third Group: Last element -->
             <div>
-                <ng-container *ngFor="let item of sidebarItems.slice(7); let i = index">
+                @for (item of sidebarItems.slice(7); track item; let i = $index) {
                     <div class="group my-4">
                         <a
                             [href]="item.link"
@@ -85,83 +81,82 @@
                         >
                             <i [class]="item.icon"></i>
                             <span class="ml-4">{{ item.title }}</span>
-                            <i
-                                *ngIf="item.subItems"
-                                class="fas fa-chevron-down ml-auto"
-                            ></i>
+                            @if (item.subItems) {
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            }
                         </a>
-                        <div
-                            *ngIf="item.subItems"
-                            class="hidden group-hover:block pl-4"
-                        >
-                            <ng-container *ngFor="let subItem of item.subItems">
-                                <a
-                                    [href]="subItem.link"
-                                    class="block p-3 text-sm font-medium rounded-lg hover:bg-hover"
-                                >
-                                    <i [class]="subItem.icon"></i>
-                                    <span class="ml-4">{{ subItem.title }}</span>
-                                </a>
-                            </ng-container>
-                        </div>
+                        @if (item.subItems) {
+                            <div class="hidden group-hover:block pl-4">
+                                @for (subItem of item.subItems; track subItem) {
+                                    <a
+                                        [href]="subItem.link"
+                                        class="block p-3 text-sm font-medium rounded-lg hover:bg-hover"
+                                    >
+                                        <i [class]="subItem.icon"></i>
+                                        <span class="ml-4">{{ subItem.title }}</span>
+                                    </a>
+                                }
+                            </div>
+                        }
                     </div>
-                </ng-container>
+                }
             </div>
         </nav>
     </div>
 
     <!--Mobile -->
-    <div
-        class="lg:hidden fixed inset-0 z-30 bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full w-64 overflow-y-auto drop-shadow-xl"
-        [ngClass]="isShowing ? 'flex' : 'hidden'"
-        *ngIf="isShowing"
-    >
-        <div class="flex items-center justify-between p-4">
-            <button
-                (click)="closeMobileSidebar()"
-                (keyup.enter)="closeMobileSidebar()"
-                tabindex="0"
-                class="focus:outline-none"
-            >
-                <span class="icon-[icon-park-outline--left-c] p-4"></span>
-            </button>
-        </div>
-        <nav class="flex-1 px-2 py-4 space-y-2">
-            <ng-container *ngFor="let item of sidebarItems">
-                <div class="group">
-                    <a
-                        [href]="getItemLink(item)"
-                        class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-hover"
-                        (click)="toggleSubItems(item, $event)"
-                        (keyup.enter)="toggleSubItems(item, $event)"
-                        tabindex="0"
-                    >
-                        <i [class]="item.icon"></i>
-                        <span class="ml-4">{{ item.title }}</span>
-                        <i
-                            *ngIf="item.subItems"
-                            class="fas fa-chevron-down ml-auto"
-                        ></i>
-                    </a>
-                    <div
-                        *ngIf="item.subItems"
-                        [ngClass]="{ block: item.isExpanded, hidden: !item.isExpanded }"
-                        class="pl-4"
-                    >
-                        <ng-container *ngFor="let subItem of item.subItems">
-                            <a
-                                [href]="subItem.link"
-                                class="block p-2 text-sm font-medium rounded-lg hover:bg-hover"
+    @if (isShowing) {
+        <div
+            class="lg:hidden fixed inset-0 z-30 bg-[#741308] text-white font-semibold flex-col transition-all duration-300 h-full w-64 overflow-y-auto drop-shadow-xl"
+            [ngClass]="isShowing ? 'flex' : 'hidden'"
+        >
+            <div class="flex items-center justify-between p-4">
+                <button
+                    (click)="closeMobileSidebar()"
+                    (keyup.enter)="closeMobileSidebar()"
+                    tabindex="0"
+                    class="focus:outline-none"
+                >
+                    <span class="icon-[icon-park-outline--left-c] p-4"></span>
+                </button>
+            </div>
+            <nav class="flex-1 px-2 py-4 space-y-2">
+                @for (item of sidebarItems; track item) {
+                    <div class="group">
+                        <a
+                            [href]="getItemLink(item)"
+                            class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-hover"
+                            (click)="toggleSubItems(item, $event)"
+                            (keyup.enter)="toggleSubItems(item, $event)"
+                            tabindex="0"
+                        >
+                            <i [class]="item.icon"></i>
+                            <span class="ml-4">{{ item.title }}</span>
+                            @if (item.subItems) {
+                                <i class="fas fa-chevron-down ml-auto"></i>
+                            }
+                        </a>
+                        @if (item.subItems) {
+                            <div
+                                [ngClass]="{ block: item.isExpanded, hidden: !item.isExpanded }"
+                                class="pl-4"
                             >
-                                <i [class]="subItem.icon"></i>
-                                <span class="ml-4">{{ subItem.title }}</span>
-                            </a>
-                        </ng-container>
+                                @for (subItem of item.subItems; track subItem) {
+                                    <a
+                                        [href]="subItem.link"
+                                        class="block p-2 text-sm font-medium rounded-lg hover:bg-hover"
+                                    >
+                                        <i [class]="subItem.icon"></i>
+                                        <span class="ml-4">{{ subItem.title }}</span>
+                                    </a>
+                                }
+                            </div>
+                        }
                     </div>
-                </div>
-            </ng-container>
-        </nav>
-    </div>
+                }
+            </nav>
+        </div>
+    }
 
     <div
         class="lg:hidden fixed inset-0 bg-black opacity-50 z-20"

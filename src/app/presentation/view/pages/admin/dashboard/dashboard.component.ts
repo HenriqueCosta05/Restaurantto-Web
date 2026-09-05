@@ -25,7 +25,7 @@ import {
 } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { Subscription } from 'rxjs';
-import { Location, NgForOf } from '@angular/common';
+import { Location } from '@angular/common';
 import { TokenService } from 'src/app/security';
 import { getCurrentWeek, getPastWeek } from '@domain/utils';
 import { API_URL } from '@shared/constants';
@@ -53,7 +53,6 @@ interface CardData {
         CardComponent,
         LineColumnComponent,
         TableComponent,
-        NgForOf,
     ],
     templateUrl: './dashboard.component.html',
     styles: ``,

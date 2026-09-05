@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatedResponse, SupplierDto } from '@domain/dtos';
@@ -19,7 +18,6 @@ import { Subscription } from 'rxjs';
         TableComponent,
         ButtonComponent,
         ReactiveFormsModule,
-        CommonModule,
         FormsModule,
     ],
     templateUrl: './dash-fornecedores.component.html',
@@ -41,7 +39,9 @@ export class DashFornecedoresComponent implements OnInit, OnDestroy {
                         contactName: supplier.contact,
                         phone: supplier.phone,
                         action: {
-                            url: '/admin/estoque/editar-fornecedor/' + supplier.id,
+                            url:
+                                '/admin/estoque/editar-fornecedor/' +
+                                supplier.id,
                             text: 'Ver mais',
                         },
                     },

@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-wrapper',
     standalone: true,
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './wrapper.component.html',
     styles: ``,
 })

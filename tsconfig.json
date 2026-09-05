@@ -2,9 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -24,29 +22,13 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
     "paths": {
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@data/*": [
-        "src/app/data/*"
-      ],
-      "@domain/*": [
-        "src/app/domain/*"
-      ],
-      "@infra/*": [
-        "src/app/infra/*"
-      ],
-      "@presentation/*": [
-        "src/app/presentation/*"
-      ],
-      "@shared/*": [
-        "src/app/shared/*"
-      ]
+      "@assets/*": ["src/assets/*"],
+      "@data/*": ["src/app/data/*"],
+      "@domain/*": ["src/app/domain/*"],
+      "@infra/*": ["src/app/infra/*"],
+      "@presentation/*": ["src/app/presentation/*"],
+      "@shared/*": ["src/app/shared/*"]
     }
   },
   "include": [

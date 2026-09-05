@@ -3,16 +3,18 @@
     <div class="flex justify-between items-center mb-4 flex-wrap">
         <!-- Filtros -->
         <ul class="flex space-x-4">
-            <li *ngFor="let filter of cardListConfig.filters; let i = index">
-                <button
-                    [ngClass]="{
-                        'text-primary font-bold underline underline-offset-2': filter.isActive,
-                    }"
-                    (click)="onFilterClick(filter)"
-                >
-                    {{ filter.text }}
-                </button>
-            </li>
+            @for (filter of cardListConfig.filters; track filter; let i = $index) {
+                <li>
+                    <button
+                        [ngClass]="{
+                            'text-primary font-bold underline underline-offset-2': filter.isActive,
+                        }"
+                        (click)="onFilterClick(filter)"
+                    >
+                        {{ filter.text }}
+                    </button>
+                </li>
+            }
         </ul>
         <!-- Métricas -->
         <span class="text-lg font-bold">{{ cardListConfig.metrics }}</span>
@@ -21,13 +23,14 @@
     <app-searchbar [searchBarConfig]="cardListConfig.search"></app-searchbar>
     <!--Cards-->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
-        <app-card
-            *ngFor="let card of cardListConfig.cards"
-            [title]="card.heading"
-            [buttonText]="card.buttonText"
-            [link]="card.link"
-            [imgSrc]="card.imgSrc"
-            [hasRedirection]="true"
-        ></app-card>
+        @for (card of cardListConfig.cards; track card) {
+            <app-card
+                [title]="card.heading"
+                [buttonText]="card.buttonText"
+                [link]="card.link"
+                [imgSrc]="card.imgSrc"
+                [hasRedirection]="true"
+            ></app-card>
+        }
     </div>
 </div>

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
     FormBuilder,
@@ -12,7 +11,7 @@ import { FormConfig } from '@domain/static/interfaces';
 @Component({
     selector: 'app-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './form.component.html',
     styles: ``,
 })

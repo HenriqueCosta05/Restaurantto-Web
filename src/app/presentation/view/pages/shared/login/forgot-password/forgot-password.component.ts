@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
     FormBuilder,
@@ -22,7 +21,6 @@ import { FormInputComponent } from '@presentation/view/components/form';
         FormComponent,
         FormInputComponent,
         ReactiveFormsModule,
-        CommonModule,
         ButtonComponent,
         FooterComponent,
     ],

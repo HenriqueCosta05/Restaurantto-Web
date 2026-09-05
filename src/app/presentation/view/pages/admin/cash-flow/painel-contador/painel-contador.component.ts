@@ -1,4 +1,4 @@
-import { CommonModule, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import {
     CardList,
@@ -31,7 +31,6 @@ import { ExpensesUseCase, RevenuesUseCase } from '@domain/usecases';
         CardComponent,
         TableComponent,
         PieComponent,
-        CommonModule,
         ButtonComponent,
         CardListComponent,
     ],

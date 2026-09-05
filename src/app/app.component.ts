@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { services } from '@domain/static/services';
@@ -10,7 +9,7 @@ import {
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [NavbarComponent, FooterComponent, RouterOutlet, CommonModule],
+    imports: [NavbarComponent, FooterComponent, RouterOutlet],
     providers: [...services],
     templateUrl: './app.component.html',
 })

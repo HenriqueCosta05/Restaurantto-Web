@@ -1,10 +1,9 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-faq',
     standalone: true,
-    imports: [NgIf, NgForOf],
+    imports: [],
     templateUrl: './faq.component.html',
     styles: ``,
 })

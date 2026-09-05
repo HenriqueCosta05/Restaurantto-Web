@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataSheetGroupUseCase } from '@domain/usecases';
 import {
@@ -14,7 +13,7 @@ interface CardData {
 @Component({
     selector: 'app-fichas-tecnicas',
     standalone: true,
-    imports: [SidebarComponent, CardComponent, ButtonComponent, CommonModule],
+    imports: [SidebarComponent, CardComponent, ButtonComponent],
     templateUrl: './fichas-tecnicas.component.html',
     styles: ``,
 })

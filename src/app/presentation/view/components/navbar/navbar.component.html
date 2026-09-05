@@ -29,16 +29,15 @@
             [ngClass]="{ block: isNavbarOpen, hidden: !isNavbarOpen }"
             class="w-full lg:flex lg:items-center lg:w-auto space-y-2 lg:space-y-0 lg:space-x-8 my-4 lg:mt-0"
         >
-            <li
-                *ngFor="let link of navLinks; let i = index"
-                class="text-center lg:text-left"
-            >
-                <a
-                    [href]="link.url"
-                    class="block lg:inline-block text-gray-700 hover:text-gray-900"
-                    >{{ link.name }}</a
-                >
-            </li>
+            @for (link of navLinks; track link; let i = $index) {
+                <li class="text-center lg:text-left">
+                    <a
+                        [href]="link.url"
+                        class="block lg:inline-block text-gray-700 hover:text-gray-900"
+                        >{{ link.name }}</a
+                    >
+                </li>
+            }
         </ul>
         <app-button
             [ngClass]="isNavbarOpen ? 'block' : 'hidden lg:block'"

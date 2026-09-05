@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -34,7 +33,6 @@ import { catchError, of } from 'rxjs';
         FormTextareaComponent,
         FormComponent,
         ButtonComponent,
-        CommonModule,
         ReactiveFormsModule,
     ],
     templateUrl: './form-layout.component.html',

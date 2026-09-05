@@ -27,21 +27,19 @@
     </div>
 
     <div class="my-16 content-center place-content-center grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full">
-        <app-card
-            *ngFor="let card of cards"
-            [hasRedirection]="true"
-            [title]="card.title"
-            [imgSrc]="'https://i.ibb.co/1RMHvDz/logo.jpg'"
-            [buttonText]="'Ver mais'"
-            [link]="card.link"
-            class="object-cover h-64 mx-auto"
-        ></app-card>
+        @for (card of cards; track card) {
+            <app-card
+                [hasRedirection]="true"
+                [title]="card.title"
+                [imgSrc]="'https://i.ibb.co/1RMHvDz/logo.jpg'"
+                [buttonText]="'Ver mais'"
+                [link]="card.link"
+                class="object-cover h-64 mx-auto"
+            ></app-card>
+        }
     </div>
 
-    <p
-        *ngIf="!cards?.length"
-        class="text-center text-gray-500"
-    >
-        Ainda não existem grupos de finanças cadastrados. Crie um já!
-    </p>
+    @if (!cards?.length) {
+        <p class="text-center text-gray-500">Ainda não existem grupos de finanças cadastrados. Crie um já!</p>
+    }
 </app-sidebar>
