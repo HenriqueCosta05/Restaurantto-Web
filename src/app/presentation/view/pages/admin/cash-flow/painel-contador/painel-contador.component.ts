@@ -6,7 +6,7 @@ import {
     ChangeDetectionStrategy,
 } from '@angular/core';
 import {
-    CardList,
+    DataItem,
     PieChartOptions,
     PieMetrics,
     TableConfig,
@@ -54,6 +54,8 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
     subscription: Subscription | null = null;
     currentPage = 1;
     pageSize = 6;
+    private _allRows: DataItem<{ valor: string; dataPagamento: string }>[] =
+        [];
 
     ngOnInit(): void {
         this._fetchExpenses();
@@ -73,6 +75,7 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
                         componentType: ['text', 'text'],
                     }),
                 );
+                this._allRows = this.tabela.data;
                 this.tabela.pagination.totalItems = response.totalElements;
                 this.tabela.pagination.totalPages = Math.ceil(
                     response.totalElements / this.pageSize,
@@ -93,6 +96,7 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
                         componentType: ['text', 'text'],
                     }),
                 );
+                this._allRows = this.tabela.data;
                 this.tabela.pagination.totalItems = response.totalElements;
                 this.tabela.pagination.totalPages = Math.ceil(
                     response.totalElements / this.pageSize,
@@ -117,8 +121,18 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
         search: {
             placeholder: '',
             value: '',
-            onSearch: function (value: string): void {
-                throw new Error('Function not implemented.');
+            onSearch: (value: string): void => {
+                this.tabela.data = value
+                    ? this._allRows.filter(
+                          (row) =>
+                              row.rowData.valor
+                                  .toLowerCase()
+                                  .includes(value.toLowerCase()) ||
+                              row.rowData.dataPagamento
+                                  .toLowerCase()
+                                  .includes(value.toLowerCase()),
+                      )
+                    : this._allRows;
             },
         },
         pagination: {
@@ -202,39 +216,6 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
         }
     }
 
-    cardListConfig: CardList = {
-        title: 'Teste',
-        cards: [
-            {
-                heading: 'Teste 1',
-                buttonText: 'Ver mais',
-                link: '/',
-                imgSrc: '../../../../../../assets/logo.svg',
-            },
-            {
-                heading: 'Teste 1',
-                buttonText: 'Ver mais',
-                link: '/',
-                imgSrc: '../../../../../../assets/logo.svg',
-            },
-        ],
-        filters: [],
-        metrics: '',
-        header: [],
-        data: [],
-        search: {
-            placeholder: '',
-            value: '',
-            onSearch: function (value: string): void {
-                throw new Error('Function not implemented.');
-            },
-        },
-        pagination: {
-            pageRange: 0,
-            totalItems: 0,
-        },
-        rowOrder: [],
-    };
     voltar() {
         this.location.back();
     }
