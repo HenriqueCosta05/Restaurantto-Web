@@ -192,13 +192,11 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
         },
     };
     ngAfterViewInit(): void {
-        if (
-            document.getElementById('stock-chart') &&
-            typeof ApexCharts !== 'undefined'
-        ) {
+        const chartElement = document.getElementById('stock-chart');
+        if (chartElement && typeof ApexCharts !== 'undefined') {
             const chart = new ApexCharts(
-                document.getElementById('stock-chart'),
-                this.data,
+                chartElement,
+                this.data as unknown as ApexCharts.ApexOptions,
             );
             chart.render();
         }

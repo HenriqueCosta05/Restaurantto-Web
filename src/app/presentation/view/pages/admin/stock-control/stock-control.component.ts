@@ -301,7 +301,10 @@ export class StockControlComponent implements OnInit, AfterViewInit {
             const chartElement = document.getElementById('stock-chart');
             if (chartElement && typeof ApexCharts !== 'undefined') {
                 if (this.data && this.data.type) {
-                    const chart = new ApexCharts(chartElement, this.data);
+                    const chart = new ApexCharts(
+                        chartElement,
+                        this.data as unknown as ApexCharts.ApexOptions,
+                    );
                     chart.render();
                 }
             }

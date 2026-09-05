@@ -28,13 +28,11 @@ export class LineColumnComponent implements AfterViewInit {
 
     constructor() {}
     ngAfterViewInit(): void {
-        if (
-            document.getElementById('column-chart') &&
-            typeof ApexCharts !== 'undefined'
-        ) {
+        const chartElement = document.getElementById('column-chart');
+        if (chartElement && typeof ApexCharts !== 'undefined') {
             const chart = new ApexCharts(
-                document.getElementById('column-chart'),
-                this.options,
+                chartElement,
+                this.options as unknown as ApexCharts.ApexOptions,
             );
             chart.render();
         }
