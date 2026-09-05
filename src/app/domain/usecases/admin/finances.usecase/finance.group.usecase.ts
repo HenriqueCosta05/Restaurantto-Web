@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpUseCaseGateway } from '@infra/http/http-usecase-gateway';
-import { ErrorService } from '@infra/http/error.service';
 import {
     DefaultResponseDto,
     PaginatedResponse,
@@ -17,10 +15,6 @@ import { API_URL } from 'src/app/shared';
 })
 export class FinanceGroupUsecase extends HttpUseCaseGateway<FinanceGroupDto> {
     public apiBase = API_URL;
-
-    constructor(_http: HttpClient, _errorService: ErrorService) {
-        super(_http, _errorService);
-    }
 
     createFinanceGroup(group: FinanceGroupDto): Observable<FinanceGroupDto> {
         return this.create(

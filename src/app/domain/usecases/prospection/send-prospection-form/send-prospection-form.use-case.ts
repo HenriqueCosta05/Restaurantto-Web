@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
 import { API_URL } from 'src/app/shared';
 import { map, Observable } from 'rxjs';
 import { ProspectionDto, DefaultResponseDto } from '@domain/dtos';

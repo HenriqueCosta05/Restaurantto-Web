@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, map, pipe } from 'rxjs';
 import {
     CollaboratorDto,
@@ -9,7 +8,6 @@ import {
     SupplierDto,
 } from '@domain/dtos';
 import { HttpUseCaseGateway } from '@infra/http/http-usecase-gateway';
-import { ErrorService } from '@infra/http/error.service';
 import { COLLABORATOR_ENDPOINTS } from '@infra/http/endpoints';
 import { API_URL } from '@shared/constants';
 
@@ -18,10 +16,6 @@ import { API_URL } from '@shared/constants';
 })
 export class CollaboratorUseCase extends HttpUseCaseGateway<CollaboratorDto> {
     private apiBase = API_URL;
-
-    constructor(_http: HttpClient, _errorService: ErrorService) {
-        super(_http, _errorService);
-    }
 
     getAllCollaborators(
         page: number,
