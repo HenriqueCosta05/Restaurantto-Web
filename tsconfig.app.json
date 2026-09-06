@@ -11,5 +11,13 @@
     "src/app/app.config.ts",
     "src/app/app.routes.ts",
     "src/app/app.component.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
 }

@@ -1,7 +1,12 @@
-import { CommonModule, Location } from '@angular/common';
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import {
-    CardList,
+    Component,
+    AfterViewInit,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
+import {
+    DataItem,
     PieChartOptions,
     PieMetrics,
     TableConfig,
@@ -17,7 +22,6 @@ import {
 } from '@presentation/view/components/chart';
 import { ExpenseDto, RevenueDto, PaginatedResponse } from '@domain/dtos';
 import ApexCharts from 'apexcharts';
-import { CardListComponent } from '../../../../components/card-list/card-list.component';
 import { TableComponent } from '../../../../components/table/table.component';
 import { Subscription } from 'rxjs';
 import { ExpensesUseCase, RevenuesUseCase } from '@domain/usecases';
@@ -31,12 +35,11 @@ import { ExpensesUseCase, RevenuesUseCase } from '@domain/usecases';
         CardComponent,
         TableComponent,
         PieComponent,
-        CommonModule,
         ButtonComponent,
-        CardListComponent,
     ],
 
     templateUrl: './painel-contador.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class PainelContadorComponent implements OnInit, AfterViewInit {
@@ -49,6 +52,8 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
     subscription: Subscription | null = null;
     currentPage = 1;
     pageSize = 6;
+    private _allRows: DataItem<{ valor: string; dataPagamento: string }>[] =
+        [];
 
     ngOnInit(): void {
         this._fetchExpenses();
@@ -68,6 +73,7 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
                         componentType: ['text', 'text'],
                     }),
                 );
+                this._allRows = this.tabela.data;
                 this.tabela.pagination.totalItems = response.totalElements;
                 this.tabela.pagination.totalPages = Math.ceil(
                     response.totalElements / this.pageSize,
@@ -88,6 +94,7 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
                         componentType: ['text', 'text'],
                     }),
                 );
+                this._allRows = this.tabela.data;
                 this.tabela.pagination.totalItems = response.totalElements;
                 this.tabela.pagination.totalPages = Math.ceil(
                     response.totalElements / this.pageSize,
@@ -112,8 +119,18 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
         search: {
             placeholder: '',
             value: '',
-            onSearch: function (value: string): void {
-                throw new Error('Function not implemented.');
+            onSearch: (value: string): void => {
+                this.tabela.data = value
+                    ? this._allRows.filter(
+                          (row) =>
+                              row.rowData.valor
+                                  .toLowerCase()
+                                  .includes(value.toLowerCase()) ||
+                              row.rowData.dataPagamento
+                                  .toLowerCase()
+                                  .includes(value.toLowerCase()),
+                      )
+                    : this._allRows;
             },
         },
         pagination: {
@@ -187,51 +204,16 @@ export class PainelContadorComponent implements OnInit, AfterViewInit {
         },
     };
     ngAfterViewInit(): void {
-        if (
-            document.getElementById('stock-chart') &&
-            typeof ApexCharts !== 'undefined'
-        ) {
+        const chartElement = document.getElementById('stock-chart');
+        if (chartElement && typeof ApexCharts !== 'undefined') {
             const chart = new ApexCharts(
-                document.getElementById('stock-chart'),
-                this.data,
+                chartElement,
+                this.data as unknown as ApexCharts.ApexOptions,
             );
             chart.render();
         }
     }
 
-    cardListConfig: CardList = {
-        title: 'Teste',
-        cards: [
-            {
-                heading: 'Teste 1',
-                buttonText: 'Ver mais',
-                link: '/',
-                imgSrc: '../../../../../../assets/logo.svg',
-            },
-            {
-                heading: 'Teste 1',
-                buttonText: 'Ver mais',
-                link: '/',
-                imgSrc: '../../../../../../assets/logo.svg',
-            },
-        ],
-        filters: [],
-        metrics: '',
-        header: [],
-        data: [],
-        search: {
-            placeholder: '',
-            value: '',
-            onSearch: function (value: string): void {
-                throw new Error('Function not implemented.');
-            },
-        },
-        pagination: {
-            pageRange: 0,
-            totalItems: 0,
-        },
-        rowOrder: [],
-    };
     voltar() {
         this.location.back();
     }

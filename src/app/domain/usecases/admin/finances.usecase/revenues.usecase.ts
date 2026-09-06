@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseUseCase, ErrorService } from '@domain/base';
+import { HttpUseCaseGateway } from '@infra/http/http-usecase-gateway';
 import {
     DefaultResponseDto,
     PaginatedResponse,
@@ -14,12 +13,8 @@ import { API_URL } from 'src/app/shared';
 @Injectable({
     providedIn: 'root',
 })
-export class RevenuesUseCase extends BaseUseCase<RevenueDto> {
+export class RevenuesUseCase extends HttpUseCaseGateway<RevenueDto> {
     public apiBase = API_URL;
-
-    constructor(_http: HttpClient, _errorService: ErrorService) {
-        super(_http, _errorService);
-    }
 
     createRevenue(data: RevenueDto): Observable<RevenueDto> {
         return this.create(

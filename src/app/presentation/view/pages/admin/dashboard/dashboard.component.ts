@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     CollaboratorDto,
     DataSheetDto,
@@ -25,7 +30,7 @@ import {
 } from '@presentation/view/components';
 import { LineColumnComponent } from '@presentation/view/components/chart';
 import { Subscription } from 'rxjs';
-import { Location, NgForOf } from '@angular/common';
+import { Location } from '@angular/common';
 import { TokenService } from 'src/app/security';
 import { getCurrentWeek, getPastWeek } from '@domain/utils';
 import { API_URL } from '@shared/constants';
@@ -53,9 +58,9 @@ interface CardData {
         CardComponent,
         LineColumnComponent,
         TableComponent,
-        NgForOf,
     ],
     templateUrl: './dashboard.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class DashboardComponent implements OnInit, OnDestroy {

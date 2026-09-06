@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Homepage } from '@domain/static/interfaces';
 import { DataTransferService } from '@domain/static/services';
 import { ButtonComponent, CardComponent } from '@presentation/view/components';
@@ -8,6 +8,7 @@ import { ButtonComponent, CardComponent } from '@presentation/view/components';
     standalone: true,
     imports: [ButtonComponent, CardComponent],
     templateUrl: './banner-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: [],
 })
 export class BannerLayoutComponent implements OnInit {

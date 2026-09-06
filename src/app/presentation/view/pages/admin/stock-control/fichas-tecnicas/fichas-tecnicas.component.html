@@ -22,25 +22,24 @@
         </app-button>
     </div>
 
-    <div
-        *ngIf="cards.length > 0"
-        class="my-16 content-center place-content-center grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full"
-    >
-        <app-card
-            *ngFor="let card of cards"
-            [hasRedirection]="true"
-            [title]="card.title"
-            [imgSrc]="'../../../../../../../assets/logo.svg'"
-            [buttonText]="'Ver mais'"
-            [link]="card.link"
-            class="object-cover mx-auto w-full"
-        ></app-card>
-    </div>
+    @if (cards.length > 0) {
+        <div
+            class="my-16 content-center place-content-center grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 w-full"
+        >
+            @for (card of cards; track card) {
+                <app-card
+                    [hasRedirection]="true"
+                    [title]="card.title"
+                    [imgSrc]="'../../../../../../../assets/logo.svg'"
+                    [buttonText]="'Ver mais'"
+                    [link]="card.link"
+                    class="object-cover mx-auto w-full"
+                ></app-card>
+            }
+        </div>
+    }
 
-    <p
-        *ngIf="!cards || !cards.length"
-        class="text-center text-gray-500 mt-16"
-    >
-        Nenhuma ficha técnica ou grupo cadastrado. Crie um agora!
-    </p>
+    @if (!cards || !cards.length) {
+        <p class="text-center text-gray-500 mt-16">Nenhuma ficha técnica ou grupo cadastrado. Crie um agora!</p>
+    }
 </app-sidebar>

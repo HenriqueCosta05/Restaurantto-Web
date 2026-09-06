@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -33,6 +33,7 @@ import { catchError, switchMap } from 'rxjs/operators';
         CommonModule,
     ],
     templateUrl: './ingredientes.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class IngredientesComponent implements OnInit {

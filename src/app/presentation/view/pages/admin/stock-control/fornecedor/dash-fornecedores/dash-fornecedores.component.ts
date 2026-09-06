@@ -1,5 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+    Component,
+    OnDestroy,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatedResponse, SupplierDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
@@ -19,10 +23,10 @@ import { Subscription } from 'rxjs';
         TableComponent,
         ButtonComponent,
         ReactiveFormsModule,
-        CommonModule,
         FormsModule,
     ],
     templateUrl: './dash-fornecedores.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class DashFornecedoresComponent implements OnInit, OnDestroy {
@@ -41,7 +45,9 @@ export class DashFornecedoresComponent implements OnInit, OnDestroy {
                         contactName: supplier.contact,
                         phone: supplier.phone,
                         action: {
-                            url: '/admin/estoque/editar-fornecedor/' + supplier.id,
+                            url:
+                                '/admin/estoque/editar-fornecedor/' +
+                                supplier.id,
                             text: 'Ver mais',
                         },
                     },

@@ -1,11 +1,11 @@
-import { NgForOf, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-faq',
     standalone: true,
-    imports: [NgIf, NgForOf],
+    imports: [],
     templateUrl: './faq.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class FaqComponent {

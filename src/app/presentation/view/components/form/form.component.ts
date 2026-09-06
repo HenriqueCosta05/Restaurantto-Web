@@ -1,5 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -12,8 +18,9 @@ import { FormConfig } from '@domain/static/interfaces';
 @Component({
     selector: 'app-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class FormComponent implements OnInit {

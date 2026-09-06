@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     ButtonComponent,
     CardComponent,
@@ -11,7 +11,6 @@ import {
     PaginatedResponse,
 } from '@domain/dtos';
 import { API_URL } from '@shared/constants';
-import { NgForOf, NgIf } from '@angular/common';
 
 interface CardData {
     title: string;
@@ -21,8 +20,9 @@ interface CardData {
 @Component({
     selector: 'app-financas',
     standalone: true,
-    imports: [SidebarComponent, CardComponent, ButtonComponent, NgIf, NgForOf],
+    imports: [SidebarComponent, CardComponent, ButtonComponent],
     templateUrl: './financas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class FinancasComponent implements OnInit {

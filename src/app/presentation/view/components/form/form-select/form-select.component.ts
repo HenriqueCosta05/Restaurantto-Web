@@ -1,5 +1,10 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+    Component,
+    forwardRef,
+    Input,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
@@ -12,6 +17,7 @@ import {
     imports: [CommonModule, ReactiveFormsModule, NgClass],
     templateUrl: './form-select.component.html',
     styles: ``,
+    changeDetection: ChangeDetectionStrategy.Eager,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

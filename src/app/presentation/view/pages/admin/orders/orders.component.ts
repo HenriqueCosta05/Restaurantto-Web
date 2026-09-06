@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
     LineColumnChartOptions,
     LineColumnMetrics,
@@ -20,6 +20,7 @@ import { LineColumnComponent } from '@presentation/view/components/chart';
         TableComponent,
     ],
     templateUrl: './orders.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class OrdersComponent {

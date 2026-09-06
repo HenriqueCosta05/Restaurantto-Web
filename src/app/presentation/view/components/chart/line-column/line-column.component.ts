@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    Input,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {
     LineColumnChartOptions,
     LineColumnMetrics,
@@ -8,6 +13,7 @@ import ApexCharts from 'apexcharts';
 @Component({
     standalone: true,
     selector: 'app-line-column',
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './line-column.component.html',
 })
 export class LineColumnComponent implements AfterViewInit {
@@ -22,13 +28,11 @@ export class LineColumnComponent implements AfterViewInit {
 
     constructor() {}
     ngAfterViewInit(): void {
-        if (
-            document.getElementById('column-chart') &&
-            typeof ApexCharts !== 'undefined'
-        ) {
+        const chartElement = document.getElementById('column-chart');
+        if (chartElement && typeof ApexCharts !== 'undefined') {
             const chart = new ApexCharts(
-                document.getElementById('column-chart'),
-                this.options,
+                chartElement,
+                this.options as unknown as ApexCharts.ApexOptions,
             );
             chart.render();
         }

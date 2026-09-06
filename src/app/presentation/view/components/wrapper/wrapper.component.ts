@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-wrapper',
     standalone: true,
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './wrapper.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class WrapperComponent {

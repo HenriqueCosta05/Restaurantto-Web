@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -27,6 +27,7 @@ import { FormInputComponent } from '../../../../../components/form/form-input/fo
         ReactiveFormsModule,
     ],
     templateUrl: './nova-financa.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class NovaFinancaComponent implements OnInit {

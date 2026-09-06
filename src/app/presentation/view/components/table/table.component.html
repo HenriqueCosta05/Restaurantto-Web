@@ -3,16 +3,18 @@
     <div class="flex justify-between items-center mb-4 flex-wrap">
         <!-- Filtros -->
         <ul class="flex space-x-4">
-            <li *ngFor="let filter of tableConfig.filters; let i = index">
-                <button
-                    [ngClass]="{
-                        'text-primary font-bold underline underline-offset-2': filter.isActive,
-                    }"
-                    (click)="onFilterClick(filter)"
-                >
-                    {{ filter.text }}
-                </button>
-            </li>
+            @for (filter of tableConfig.filters; track filter; let i = $index) {
+                <li>
+                    <button
+                        [ngClass]="{
+                            'text-primary font-bold underline underline-offset-2': filter.isActive,
+                        }"
+                        (click)="onFilterClick(filter)"
+                    >
+                        {{ filter.text }}
+                    </button>
+                </li>
+            }
         </ul>
         <!-- Métricas -->
         <span class="text-lg font-bold">{{ tableConfig.metrics }}</span>
@@ -24,44 +26,48 @@
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-[#74031820]">
                 <tr>
-                    <th
-                        *ngFor="let headerItem of tableConfig.header; let i = index"
-                        scope="col"
-                        class="px-6 py-3"
-                    >
-                        {{ headerItem }}
-                    </th>
+                    @for (headerItem of tableConfig.header; track headerItem; let i = $index) {
+                        <th
+                            scope="col"
+                            class="px-6 py-3"
+                        >
+                            {{ headerItem }}
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    *ngFor="let dataItem of tableConfig.data; let i = index"
-                    class="bg-white border-b"
-                >
-                    <td
-                        *ngFor="let key of tableConfig.rowOrder; let j = index"
-                        class="px-6 py-4"
-                    >
-                        <button
-                            *ngIf="dataItem.componentType[j] === 'button'"
-                            class="bg-primary px-4 py-2 rounded-md text-white"
-                            [routerLink]="getRowDataValue(dataItem.rowData, key).url"
+                @for (dataItem of tableConfig.data; track dataItem; let i = $index) {
+                    <tr class="bg-white border-b">
+                        @for (key of tableConfig.rowOrder; track key; let j = $index) {
+                            <td class="px-6 py-4">
+                                @if (dataItem.componentType[j] === 'button') {
+                                    <button
+                                        class="bg-primary px-4 py-2 rounded-md text-white"
+                                        [routerLink]="getRowDataValue(dataItem.rowData, key).url"
+                                    >
+                                        {{ getRowDataValue(dataItem.rowData, key).text }}
+                                    </button>
+                                }
+                                @if (dataItem.componentType[j] === 'text') {
+                                    <span>
+                                        {{ dataItem.rowData[key] }}
+                                    </span>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+                @if (!tableConfig.data || tableConfig.data.length === 0) {
+                    <tr>
+                        <td
+                            colspan="100%"
+                            class="p-2 text-center"
                         >
-                        {{ getRowDataValue(dataItem.rowData, key).text }}
-                        </button>
-                        <span *ngIf="dataItem.componentType[j] === 'text'">
-                            {{ dataItem.rowData[key] }}
-                        </span>
-                    </td>
-                </tr>
-                <tr *ngIf="!tableConfig.data || tableConfig.data.length === 0">
-                    <td
-                        colspan="100%"
-                        class="p-2 text-center"
-                    >
-                        <span class="text-gray-700">Nenhum dado encontrado</span>
-                    </td>
-                </tr>
+                            <span class="text-gray-700">Nenhum dado encontrado</span>
+                        </td>
+                    </tr>
+                }
             </tbody>
 
             <tfoot class="bg-[#74031820]">

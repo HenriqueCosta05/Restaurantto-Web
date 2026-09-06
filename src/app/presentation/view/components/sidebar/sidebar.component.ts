@@ -5,6 +5,7 @@ import {
     AfterViewInit,
     OnDestroy,
     ElementRef,
+    ChangeDetectionStrategy,
 } from '@angular/core';
 import { sidebarData } from '@domain/static/data';
 import { SidebarItem } from '@domain/static/interfaces';
@@ -15,6 +16,7 @@ import { BehaviorSubject } from 'rxjs';
     standalone: true,
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [CommonModule],
 })
 export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {

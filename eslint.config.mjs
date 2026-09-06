@@ -54,7 +54,7 @@ export default [
 
             parserOptions: {
                 project: true,
-                tsconfigRootDir: './',
+                tsconfigRootDir: __dirname,
             },
         },
 
@@ -93,6 +93,7 @@ export default [
             '@angular-eslint/no-empty-lifecycle-method': 'off',
             '@typescript-eslint/no-unsafe-argument': 'off',
             '@typescript-eslint/unbound-method': 'off',
+            '@angular-eslint/prefer-inject': 'off',
             'no-empty': 'off'
         },
     },

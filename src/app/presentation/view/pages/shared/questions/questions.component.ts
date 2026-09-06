@@ -1,12 +1,12 @@
-import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FaqComponent, SidebarComponent } from '@presentation/view/components';
 
 @Component({
     selector: 'app-questions',
     standalone: true,
-    imports: [SidebarComponent, FaqComponent, NgForOf],
+    imports: [SidebarComponent, FaqComponent],
     templateUrl: './questions.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class QuestionsComponent {

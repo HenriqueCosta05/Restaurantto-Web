@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { TableConfig } from '@domain/static/interfaces';
 import {
@@ -15,8 +14,9 @@ import { ExpenseDto, FinanceGroupDto, RevenueDto } from '@domain/dtos';
 @Component({
     selector: 'app-grupo-financas',
     standalone: true,
-    imports: [SidebarComponent, TableComponent, ButtonComponent, CommonModule],
+    imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './grupo-financas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class GrupoFinancasComponent implements OnInit {

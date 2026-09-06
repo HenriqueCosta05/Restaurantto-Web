@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
@@ -25,10 +24,10 @@ import { TokenService } from 'src/app/security';
         FormComponent,
         FormInputComponent,
         ReactiveFormsModule,
-        CommonModule,
         ButtonComponent,
         FooterComponent,
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
 })
 export class LoginComponent implements OnInit {

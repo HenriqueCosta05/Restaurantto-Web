@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { ErrorService, BaseUseCaseRepository } from '.';
+import { ErrorService } from './error.service';
+import { BaseUseCaseRepository } from '@domain/base';
 import {
     PaginatedResponse,
     ListByPeriodDto,
@@ -12,7 +13,9 @@ import {
 @Injectable({
     providedIn: 'root',
 })
-export class BaseUseCase<Entity> implements BaseUseCaseRepository<Entity> {
+export class HttpUseCaseGateway<Entity>
+    implements BaseUseCaseRepository<Entity>
+{
     public baseSubject = new BehaviorSubject<Entity[]>([]);
     public base$ = this.baseSubject.asObservable();
 

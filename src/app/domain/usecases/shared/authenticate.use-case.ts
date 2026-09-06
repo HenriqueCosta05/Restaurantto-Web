@@ -1,52 +1,33 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { InputSendLoginFormDto, OutputSendLoginFormDto } from '@domain/dtos';
-import { Observable, catchError, map, of } from 'rxjs';
-import { API_URL } from 'src/app/shared';
+import { Observable } from 'rxjs';
+import {
+    AUTH_GATEWAY,
+    AuthGateway,
+    SESSION_GATEWAY,
+    SessionGateway,
+} from '@domain/base';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthenticateUseCase {
-    public apiBase = API_URL;
+    constructor(
+        @Inject(AUTH_GATEWAY) private _authGateway: AuthGateway,
+        @Inject(SESSION_GATEWAY) private _sessionGateway: SessionGateway,
+    ) {}
 
-    constructor(private _http: HttpClient) {}
     sendCredentials(
         data: InputSendLoginFormDto,
     ): Observable<OutputSendLoginFormDto> {
-        return this._http
-            .post<OutputSendLoginFormDto>(
-                `${this.apiBase}/api/users/login`,
-                data,
-                {
-                    observe: 'response',
-                },
-            )
-            .pipe(
-                map((response: HttpResponse<OutputSendLoginFormDto>) => {
-                    const finalResponse: OutputSendLoginFormDto = {
-                        statusCode: response.status,
-                        token: response.body?.token,
-                        id: response.body?.id,
-                    };
-                    return finalResponse;
-                }),
-                catchError((error) => {
-                    return of({
-                        statusCode: error.error.statusCode,
-                        message: error.error.message,
-                    });
-                }),
-            );
+        return this._authGateway.sendCredentials(data);
     }
 
     isLoggedIn(): boolean {
-        return document.cookie.includes('token');
+        return this._sessionGateway.isLoggedIn();
     }
 
     logout(): void {
-        document.cookie =
-            'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        console.log(document.cookie);
+        this._sessionGateway.logout();
     }
 }

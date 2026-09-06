@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataSheetDto, DataSheetGroupDto } from '@domain/dtos';
 import { TableConfig } from '@domain/static/interfaces';
@@ -15,6 +21,7 @@ import { Subscription } from 'rxjs';
     standalone: true,
     imports: [SidebarComponent, TableComponent, ButtonComponent],
     templateUrl: './grupo-fichas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class GrupoFichasComponent implements OnInit, OnDestroy {
@@ -22,6 +29,7 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
     groupName = '';
     currentPage = 1;
     pageSize = 6;
+    private _currentGroup: DataSheetGroupDto | null = null;
     tabela: TableConfig<{
         prato: string;
         dataCadastro: string;
@@ -43,7 +51,18 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
             placeholder: 'Buscar por ficha técnica',
             value: '',
             onSearch: (value: string): void => {
-                throw new Error('Function not implemented.');
+                if (!this._currentGroup) return;
+                const filtered = value
+                    ? this._currentGroup.datasheets.filter((dataSheet) =>
+                          dataSheet.name
+                              .toLowerCase()
+                              .includes(value.toLowerCase()),
+                      )
+                    : this._currentGroup.datasheets;
+                this.tabela.data = this._mapDataSheetsToRows(filtered);
+                this.tabela.pagination.totalItems = filtered.length;
+                this.tabela.metrics =
+                    'Total: ' + filtered.length + ' fichas técnicas';
             },
         },
         pagination: {
@@ -97,21 +116,24 @@ export class GrupoFichasComponent implements OnInit, OnDestroy {
     }
 
     private _loadDataSheets(groupSheet: DataSheetGroupDto): void {
-        this.tabela.data = groupSheet.datasheets.map(
-            (dataSheet: DataSheetDto) => ({
-                rowData: {
-                    prato: dataSheet.name,
-                    dataCadastro: dataSheet.createdAt || '',
-                    acoes: {
-                        text: 'Visualizar/Editar Ficha',
-                        url: `/admin/estoque/fichas-tecnicas/editar-ficha/${dataSheet.id}`,
-                    },
-                },
-                componentType: ['text', 'text', 'button'],
-            }),
-        );
+        this._currentGroup = groupSheet;
+        this.tabela.data = this._mapDataSheetsToRows(groupSheet.datasheets);
         this.tabela.pagination.totalItems = groupSheet.datasheets.length;
         this.tabela.metrics =
             'Total: ' + groupSheet.datasheets.length + ' fichas técnicas';
+    }
+
+    private _mapDataSheetsToRows(datasheets: DataSheetDto[]) {
+        return datasheets.map((dataSheet: DataSheetDto) => ({
+            rowData: {
+                prato: dataSheet.name,
+                dataCadastro: dataSheet.createdAt || '',
+                acoes: {
+                    text: 'Visualizar/Editar Ficha',
+                    url: `/admin/estoque/fichas-tecnicas/editar-ficha/${dataSheet.id}`,
+                },
+            },
+            componentType: ['text', 'text', 'button'],
+        }));
     }
 }

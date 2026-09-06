@@ -7,10 +7,9 @@
     >
         {{ question }}
     </h3>
-    <p
-        *ngIf="isVisible"
-        class="bg-gray-100 p-4 border-l-4 border-[#741308] mt-2"
-    >
-        {{ answer }}
-    </p>
+    @if (isVisible) {
+        <p class="bg-gray-100 p-4 border-l-4 border-[#741308] mt-2">
+            {{ answer }}
+        </p>
+    }
 </div>

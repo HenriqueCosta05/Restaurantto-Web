@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CardList } from '@domain/static/interfaces';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { CardComponent } from '../card/card.component';
@@ -9,6 +9,7 @@ import { CardComponent } from '../card/card.component';
     standalone: true,
     imports: [CommonModule, SearchbarComponent, CardComponent],
     templateUrl: './card-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: ``,
 })
 export class CardListComponent {
